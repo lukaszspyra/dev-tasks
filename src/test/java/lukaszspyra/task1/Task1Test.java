@@ -2,13 +2,15 @@ package lukaszspyra.task1;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the first task.
  */
 public class Task1Test {
-
 
   @Test
   public void outputShallBeDistinctSortedWithMeasurements() {
@@ -18,14 +20,15 @@ public class Task1Test {
         "count: 6\n" +
         "distinct: 5\n" +
         "min: 1\n" +
-        "max: 20\n";
-    Task1 task1 = new Task1();
+        "max: 20";
+    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    Task1 task1 = new Task1(new PrintStream(outputStream));
 
     //when
-    String output = task1.processInput(input);
+    task1.processInput(input);
 
     //then
-    assertEquals(expectedOutput, output);
+    assertEquals(expectedOutput, outputStream.toString());
   }
 
 }
