@@ -26,7 +26,7 @@ public class Task3Test {
     Task3 task3 = new Task3(new PrintStream(outputStream));
 
     //when
-    task3.countSeparateGraphs(connections, input);
+    task3.printSeparateGraphs(connections, input);
 
     //then
     assertEquals(expectedOutput, outputStream.toString());
