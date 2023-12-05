@@ -3,8 +3,10 @@ package lukaszspyra.task3;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Task3 {
 
@@ -17,16 +19,67 @@ public class Task3 {
     this.out = out;
   }
 
+  /**
+   * Prints number of separated graphs, based on the pairs of connections.
+   *
+   * <pre>
+   * e.g. for the given input:
+   *   3
+   * 1 2
+   * 2 3
+   * 4 5
+   *
+   * visualized as:
+   * [1]-[2]-[3]
+   *
+   * [4]-[5]
+   *
+   * results in printing 2 for separated graphs.
+   * </pre>
+   *
+   * @param connections number of connections(edges)
+   * @param input       pairs of vertices forming connection
+   */
   void printSeparateGraphs(final int connections, final int[][] input) {
     Map<Integer, List<Integer>> graphModel = createGraphModel(input, connections);
+    int separatedGraphs = countSeparatedGraphs(graphModel);
+    out.print(separatedGraphs);
+  }
 
+  private int countSeparatedGraphs(final Map<Integer, List<Integer>> graphModel) {
+    int coutSeparateGraphs = 0;
+    Set<Integer> visitedNodes = new HashSet<>();
+    for (Integer rootNode : graphModel.keySet()) {
+      if (!visitedNodes.contains(rootNode)) {
+        coutSeparateGraphs++;
+        visitAllChildrenDFSRecursive(rootNode, graphModel, visitedNodes);
+      }
+    }
+    return coutSeparateGraphs;
+  }
+
+  /**
+   * Visits all adjacent nodes recursively using depth first search algorithm.
+   * Visited nodes are added to the set of values. Recursion stops when new root node is already visited.
+   *
+   * @param rootNode     current node treated as root
+   * @param graphModel   model
+   * @param visitedNodes set of visited nodes
+   */
+  private void visitAllChildrenDFSRecursive(final Integer rootNode, final Map<Integer, List<Integer>> graphModel, final Set<Integer> visitedNodes) {
+    visitedNodes.add(rootNode);
+    for (Integer newRoot : graphModel.get(rootNode)) {
+      if (!visitedNodes.contains(newRoot)) {
+        visitAllChildrenDFSRecursive(newRoot, graphModel, visitedNodes);
+      }
+    }
   }
 
   /**
    * Creates graphs model in form of collection of vertices and corresponding adjacent list
    *
    * @param verticesPairs pair forming connections in graph
-   * @param connections   number of connections
+   * @param connections   number of connection
    * @return modelled graph
    */
   private Map<Integer, List<Integer>> createGraphModel(final int[][] verticesPairs, int connections) {
