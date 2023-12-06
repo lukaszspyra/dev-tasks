@@ -7,9 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the first task.
@@ -26,7 +25,7 @@ public class Task1Test {
         "min: 1\n" +
         "max: 20";
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    final Console testConsole = new Console(new Scanner("test"), new PrintStream(outputStream), null);
+    final Console testConsole = new Console(null, new PrintStream(outputStream), null);
     Task1 task1 = new Task1(2, testConsole);
 
     //when
@@ -34,8 +33,7 @@ public class Task1Test {
     testConsole.printStats(task1.calculateStats(inputList));
 
     //then
-    final String s = outputStream.toString();
-    assertTrue(s.contains(expectedOutput));
+    assertEquals(expectedOutput, outputStream.toString());
   }
 
 }

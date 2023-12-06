@@ -66,4 +66,9 @@ public class Console {
     }
   }
 
+  public void task2Usage() {
+    output.println("Enter list of integer separated by spaces, confirm with ENTER. Application will all the pairs in the " +
+        "list, that sum up to 13 in ascending order. First number will be always not greater that second one");
+  }
+
 }
