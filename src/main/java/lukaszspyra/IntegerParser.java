@@ -7,13 +7,18 @@ import java.util.List;
 
 public class IntegerParser {
 
+  private final NumberFormat integerInstance = NumberFormat.getIntegerInstance();
+
   public List<Integer> parse(final String[] strings) throws ParseException {
-    NumberFormat integerInstance = NumberFormat.getIntegerInstance();
     final List<Integer> integers = new LinkedList<>();
     for (String i : strings) {
       integers.add(integerInstance.parse(i).intValue());
     }
     return integers;
+  }
+
+  public int parse(final String string) throws ParseException {
+    return integerInstance.parse(string).intValue();
   }
 
 }

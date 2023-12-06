@@ -1,5 +1,7 @@
 package lukaszspyra;
 
+import lukaszspyra.task3.InputGraphData;
+
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.List;
@@ -31,6 +33,49 @@ public class Console {
     return integers;
   }
 
+  public InputGraphData readGraphData() {
+    int numberOfConnections = readFirstPositiveNumber();
+    int[][] connectedVertices = readPairs(numberOfConnections);
+    return new InputGraphData(numberOfConnections, connectedVertices);
+  }
+
+  private int readFirstPositiveNumber() {
+    final String line = input.nextLine().trim();
+    int numberOfConnections = 0;
+    try {
+      numberOfConnections = integerParser.parse(line);
+      if (numberOfConnections <= 0) {
+        invalidInput();
+        System.exit(1);
+      }
+    } catch (ParseException e) {
+      invalidInput();
+      System.exit(1);
+    }
+    return numberOfConnections;
+  }
+
+  private int[][] readPairs(final int numberOfConnections) {
+    int[][] pairs = new int[numberOfConnections][2];
+    for (int i = 0; i < numberOfConnections; i++) {
+      final String line = input.nextLine().trim();
+      final String[] strings = line.split("\\s+");
+      if (strings.length != 2) {
+        invalidInput();
+        System.exit(1);
+      }
+      try {
+        final List<Integer> integers = integerParser.parse(strings);
+        pairs[i][0] = integers.get(0);
+        pairs[i][1] = integers.get(1);
+      } catch (ParseException e) {
+        invalidInput();
+        System.exit(1);
+      }
+    }
+    return pairs;
+  }
+
   public void printStats(String message) {
     output.print(message);
   }
@@ -51,7 +96,7 @@ public class Console {
   }
 
   public void task1Usage() {
-    output.println("Enter list of integer separated by spaces, confirm with ENTER. Application will print distinct numbers and statistics:");
+    output.println("Application will print distinct numbers and statistics from entered integers.\nType list of integers separated by spaces, confirm with ENTER:");
   }
 
   private void invalidInput() {
@@ -67,8 +112,18 @@ public class Console {
   }
 
   public void task2Usage() {
-    output.println("Enter list of integer separated by spaces, confirm with ENTER.\nApplication will print all the pairs in the " +
-        "list, that sum up to 13, in ascending order. First number will be not greater that second one.");
+    output.println("Application will print all the pairs in the list, that sum up to 13, in ascending order. First number will be not greater that second one.\n" +
+        "Enter list of integer separated by spaces, confirm with ENTER:");
+  }
+
+  public void task3Usage() {
+    output.println("Application will print number of separated graphs.\nThe first line of input shall contain one POSITIVE number n, next exactly n lines shall contain pairs " +
+        "of positive integers,\nwhere each pair identifies a connection between two vertices in a graph.\n" +
+        "Enter data, each line confirm with ENTER:");
+  }
+
+  public void printNumber(final int separatedGraphs) {
+    output.print(separatedGraphs);
   }
 
 }

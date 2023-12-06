@@ -7,7 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +24,7 @@ public class Task2Test {
         "6 7\n" +
         "6 7";
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Task2 task2 = new Task2(new Console(new Scanner("test"), new PrintStream(outputStream), null));
+    Task2 task2 = new Task2(new Console(null, new PrintStream(outputStream), null));
 
     //when
     task2.findPairsSumming13(input);

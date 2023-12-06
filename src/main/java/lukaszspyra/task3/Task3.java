@@ -1,6 +1,7 @@
 package lukaszspyra.task3;
 
-import java.io.PrintStream;
+import lukaszspyra.Console;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,13 +11,16 @@ import java.util.Set;
 
 public class Task3 {
 
-  /**
-   * Used as a field to capture state for output unit test.
-   */
-  private PrintStream out;
+  private final Console console;
 
-  Task3(final PrintStream out) {
-    this.out = out;
+  Task3(final Console console) {
+    this.console = console;
+  }
+
+  void startApp(){
+    console.task3Usage();
+    final InputGraphData graphData = console.readGraphData();
+    findSeparateGraphs(graphData.getConnectionsNumber(), graphData.getConnectedVertices());
   }
 
   /**
@@ -40,10 +44,10 @@ public class Task3 {
    * @param connections number of connections(edges)
    * @param input       pairs of vertices forming connection
    */
-  void printSeparateGraphs(final int connections, final int[][] input) {
+  void findSeparateGraphs(final int connections, final int[][] input) {
     Map<Integer, List<Integer>> graphModel = createGraphModel(input, connections);
     int separatedGraphs = countSeparatedGraphs(graphModel);
-    out.print(separatedGraphs);
+    console.printNumber(separatedGraphs);
   }
 
   private int countSeparatedGraphs(final Map<Integer, List<Integer>> graphModel) {

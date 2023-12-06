@@ -1,5 +1,6 @@
 package lukaszspyra.task3;
 
+import lukaszspyra.Console;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,10 +21,10 @@ public class Task3Test {
   public void shallCountSeparateGraphs(int[][] input, int connections, String expectedOutput) {
     //given
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Task3 task3 = new Task3(new PrintStream(outputStream));
+    Task3 task3 = new Task3(new Console(null, new PrintStream(outputStream), null));
 
     //when
-    task3.printSeparateGraphs(connections, input);
+    task3.findSeparateGraphs(connections, input);
 
     //then
     assertEquals(expectedOutput, outputStream.toString());
