@@ -1,6 +1,4 @@
-package lukaszspyra.task1;
-
-import lukaszspyra.IntegerParser;
+package lukaszspyra;
 
 import java.io.PrintStream;
 import java.text.ParseException;
@@ -20,7 +18,7 @@ public class Console {
     this.integerParser = integerParser;
   }
 
-  List<Integer> readNumberList() {
+  public List<Integer> readNumberList() {
     final String line = input.nextLine();
     final String[] strings = line.trim().split("\\s+");
     List<Integer> integers = null;
@@ -33,11 +31,11 @@ public class Console {
     return integers;
   }
 
-  void printStats(String message) {
+  public void printStats(String message) {
     output.print(message);
   }
 
-  void printNumbers(final Map<Integer, List<Integer>> batchProcessedNumbers) {
+  public void printNumbers(final Map<Integer, List<Integer>> batchProcessedNumbers) {
     output.print(batchProcessedNumbers.values()
         .stream()
         .flatMap(List::stream)
@@ -52,12 +50,20 @@ public class Console {
     output.print("\n");
   }
 
-  void task1Usage() {
+  public void task1Usage() {
     output.println("Enter list of integer separated by spaces, confirm with ENTER. Application will print distinct numbers and statistics:");
   }
 
-  void invalidInput() {
+  private void invalidInput() {
     output.println("Invalid input try again.");
+  }
+
+  public void printPair(int firstNumber, int secondNumber, boolean isFirstLine) {
+    if (isFirstLine) {
+      output.printf("%d %d", firstNumber, secondNumber);
+    } else {
+      output.printf("\n%d %d", firstNumber, secondNumber);
+    }
   }
 
 }

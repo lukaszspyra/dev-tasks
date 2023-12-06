@@ -1,5 +1,7 @@
 package lukaszspyra.task1;
 
+import lukaszspyra.Console;
+
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;

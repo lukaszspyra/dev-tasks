@@ -1,5 +1,6 @@
 package lukaszspyra.task1;
 
+import lukaszspyra.Console;
 import lukaszspyra.IntegerParser;
 
 import java.util.Scanner;

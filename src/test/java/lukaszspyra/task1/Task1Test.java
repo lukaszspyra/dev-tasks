@@ -1,5 +1,6 @@
 package lukaszspyra.task1;
 
+import lukaszspyra.Console;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
