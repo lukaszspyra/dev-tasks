@@ -103,14 +103,6 @@ public class Console {
     output.println("Invalid input try again.");
   }
 
-  public void printPair(int firstNumber, int secondNumber, boolean isFirstLine) {
-    if (isFirstLine) {
-      output.printf("%d %d", firstNumber, secondNumber);
-    } else {
-      output.printf("\n%d %d", firstNumber, secondNumber);
-    }
-  }
-
   public void task2Usage() {
     output.println("Application will print all the pairs in the list, that sum up to 13, in ascending order. First number will be not greater that second one.\n" +
         "Enter list of integer separated by spaces, confirm with ENTER:");
@@ -124,6 +116,14 @@ public class Console {
 
   public void printNumber(final int separatedGraphs) {
     output.print(separatedGraphs);
+  }
+
+  public void printPair(final int pairingSumKey, final int currentNumber, final boolean isFirstLine) {
+    if (isFirstLine) {
+      output.printf("%d %d", pairingSumKey, currentNumber);
+    } else {
+      output.printf("\n%d %d", pairingSumKey, currentNumber);
+    }
   }
 
 }

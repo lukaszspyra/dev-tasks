@@ -49,6 +49,14 @@ public class Task2Test {
                 "0 13\n" +
                 "0 13\n" +
                 "0 13"
+        ),
+        Arguments.of(Arrays.asList(6, 7, 6),
+            "6 7\n" +
+                "6 7"
+        ),
+        Arguments.of(Arrays.asList(7, 6, 7),
+            "6 7\n" +
+                "6 7"
         )
     );
   }
