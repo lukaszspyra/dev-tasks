@@ -1,4 +1,4 @@
-package lukaszspyra.task1.benchmark;
+package lukaszspyra.benchmark.task1;
 
 import lukaszspyra.task1.Task1;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -25,11 +25,7 @@ import static java.util.stream.Collectors.toList;
 @Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MICROSECONDS)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @BenchmarkMode(Mode.AverageTime)
-public class BenchmarkRunner {
-
-  public static void main(String[] args) throws Exception {
-    org.openjdk.jmh.Main.main(args);
-  }
+public class Task1BenchmarkRunner {
 
   @Benchmark
   public void task1WithDifferentBatchSizes(BenchmarkInput input) {
