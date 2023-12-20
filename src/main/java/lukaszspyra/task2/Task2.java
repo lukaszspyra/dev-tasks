@@ -2,6 +2,7 @@ package lukaszspyra.task2;
 
 import lukaszspyra.Console;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -41,5 +42,28 @@ public class Task2 {
       }
     }
   }
+
+  public void bruteForceFindPairsSumming13(final List<Integer> input) {
+    Collections.sort(input);
+    int sum = 13;
+    boolean isFirstLine = true;
+    for (int i = 0; i < input.size(); i++) {
+      int a = input.get(i);
+
+      for (int j = 0; j < input.size(); j++) {
+        if (i == j) continue;
+        int b = input.get(j);
+        if (a + b == sum) {
+          if (a <= b) {
+            console.printPair(a, b, isFirstLine);
+            isFirstLine = false;
+          }
+        }
+
+      }
+    }
+
+  }
+
 
 }

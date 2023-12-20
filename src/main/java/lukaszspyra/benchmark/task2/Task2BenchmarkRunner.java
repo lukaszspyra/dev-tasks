@@ -34,11 +34,16 @@ public class Task2BenchmarkRunner {
     input.task2.findPairsSumming13(input.SAMPLE_NUMBERS);
   }
 
+  @Benchmark
+  public void task2FindPairsOf13BruteForce(BenchmarkInput input) {
+    input.task2.bruteForceFindPairsSumming13(input.SAMPLE_NUMBERS);
+  }
+
   @State(Scope.Benchmark)
   public static class BenchmarkInput {
 
     Task2 task2;
-    final List<Integer> SAMPLE_NUMBERS = IntStream.range(1, 10000000).boxed().collect(toList());
+    final List<Integer> SAMPLE_NUMBERS = IntStream.range(1, 100000).boxed().collect(toList());
 
     @Setup(Level.Invocation)
     public void setUp() {
