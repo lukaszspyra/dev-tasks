@@ -12,7 +12,7 @@ public class Task1 {
   private final Console console;
   private final int batchSize;
 
-  Task1(final int batchSize, final Console console) {
+  public Task1(final int batchSize, final Console console) {
     this.batchSize = batchSize;
     this.console = console;
   }
@@ -30,7 +30,7 @@ public class Task1 {
    * @param input integers list
    * @return map with key representing batch number and corresponding lists of batched integers
    */
-  Map<Integer, List<Integer>> batchProcessInput(final List<Integer> input) {
+  public Map<Integer, List<Integer>> batchProcessInput(final List<Integer> input) {
     return input.stream()
         .distinct()
         .sorted()
@@ -44,7 +44,7 @@ public class Task1 {
    * @param input integers
    * @return String with stats
    */
-  String calculateStats(final List<Integer> input) {
+  public String calculateStats(final List<Integer> input) {
     final long size = input.size();
     final IntSummaryStatistics statistics = input.stream()
         .distinct()
