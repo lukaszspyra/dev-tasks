@@ -10,7 +10,7 @@ public class Task2 {
 
   private final Console console;
 
-  Task2(final Console console) {
+  public Task2(final Console console) {
     this.console = console;
   }
 
@@ -19,7 +19,7 @@ public class Task2 {
     findPairsSumming13(console.readNumberList());
   }
 
-  void findPairsSumming13(final List<Integer> input) {
+  public void findPairsSumming13(final List<Integer> input) {
     Map<Integer, Integer> pairsWithOccurrence = new TreeMap<>();
     int requiredSum = 13;
     boolean isFirstLine = true;
