@@ -3,7 +3,6 @@ package lukaszspyra.benchmark.task1;
 import lukaszspyra.task1.Task1;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
@@ -20,10 +19,9 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-@Fork(1)
 @Warmup(iterations = 2, time = 100, timeUnit = TimeUnit.MICROSECONDS)
 @Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MICROSECONDS)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 @BenchmarkMode(Mode.AverageTime)
 public class Task1BenchmarkRunner {
 
