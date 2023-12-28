@@ -1,5 +1,6 @@
 package lukaszspyra.benchmark.task1;
 
+import lukaszspyra.Console;
 import lukaszspyra.task1.Task1;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -13,6 +14,8 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
@@ -27,8 +30,12 @@ public class Task1BenchmarkRunner {
 
   @Benchmark
   public void task1WithDifferentBatchSizes(BenchmarkInput input) {
-    input.task1.batchProcessInput(input.SAMPLE_NUMBERS);
-    input.task1.calculateStats(input.SAMPLE_NUMBERS);
+    input.task1.processInput(input.SAMPLE_NUMBERS);
+  }
+
+  @Benchmark
+  public void task1SingleStreamProcessing(BenchmarkInput input) {
+    input.task1.singleStreamProcessedInput(input.SAMPLE_NUMBERS);
   }
 
   @State(Scope.Benchmark)
@@ -41,7 +48,12 @@ public class Task1BenchmarkRunner {
 
     @Setup(Level.Invocation)
     public void setUp() {
-      task1 = new Task1(batchSize, null);
+      PrintStream mockStream = new PrintStream(new OutputStream() {
+        public void write(int b) {
+          //mock
+        }
+      });
+      task1 = new Task1(batchSize, new Console(null, mockStream, null));
     }
 
   }

@@ -29,8 +29,27 @@ public class Task1Test {
     Task1 task1 = new Task1(2, testConsole);
 
     //when
-    testConsole.printNumbers(task1.batchProcessInput(inputList));
-    testConsole.printStats(task1.calculateStats(inputList));
+    task1.processInput(inputList);
+
+    //then
+    assertEquals(expectedOutput, outputStream.toString());
+  }
+
+  @Test
+  public void outputShallBeDistinctSortedWithMeasurementsUsingSingleStreamProcessing() {
+    //given
+    List<Integer> inputList = Arrays.asList(1, 10, 20, 20, 2, 5);
+    String expectedOutput = "1 2 5 10 20\n" +
+        "count: 6\n" +
+        "distinct: 5\n" +
+        "min: 1\n" +
+        "max: 20";
+    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    final Console testConsole = new Console(null, new PrintStream(outputStream), null);
+    Task1 task1 = new Task1(2, testConsole);
+
+    //when
+    task1.singleStreamProcessedInput(inputList);
 
     //then
     assertEquals(expectedOutput, outputStream.toString());

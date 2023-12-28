@@ -20,6 +20,10 @@ public class Task1 {
   void startApp() {
     console.task1Usage();
     final List<Integer> input = console.readNumberList();
+    processInput(input);
+  }
+
+  public void processInput(final List<Integer> input) {
     console.printNumbers(batchProcessInput(input));
     console.printStats(calculateStats(input));
   }
@@ -55,6 +59,20 @@ public class Task1 {
         "distinct: " + statistics.getCount() + "\n" +
         "min: " + statistics.getMin() + "\n" +
         "max: " + statistics.getMax();
+  }
+
+  public void singleStreamProcessedInput(final List<Integer> input) {
+    final long size = input.size();
+    final IntSummaryStatistics statistics = input.stream()
+        .distinct()
+        .sorted()
+        .mapToInt(Integer::intValue)
+        .peek(console::printStreamElements)
+        .summaryStatistics();
+    console.printStats("\ncount: " + size + "\n" +
+        "distinct: " + statistics.getCount() + "\n" +
+        "min: " + statistics.getMin() + "\n" +
+        "max: " + statistics.getMax());
   }
 
 }

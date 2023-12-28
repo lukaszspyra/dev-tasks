@@ -14,6 +14,8 @@ public class Console {
   private final PrintStream output;
   private final IntegerParser integerParser;
 
+  private static boolean isStreamFirstElement = true;
+
   public Console(final Scanner input, final PrintStream output, final IntegerParser integerParser) {
     this.input = input;
     this.output = output;
@@ -123,6 +125,15 @@ public class Console {
       output.printf("%d %d", pairingSumKey, currentNumber);
     } else {
       output.printf("\n%d %d", pairingSumKey, currentNumber);
+    }
+  }
+
+  public void printStreamElements(final int element) {
+    if (isStreamFirstElement) {
+      output.printf("%d", element);
+      isStreamFirstElement = false;
+    } else {
+      output.printf(" %d", element);
     }
   }
 
