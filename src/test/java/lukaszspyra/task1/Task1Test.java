@@ -26,11 +26,10 @@ public class Task1Test {
         "max: 20";
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     final Console testConsole = new Console(null, new PrintStream(outputStream), null);
-    Task1 task1 = new Task1(2, testConsole);
+    Task1 task1 = new Task1(testConsole);
 
     //when
-    testConsole.printNumbers(task1.batchProcessInput(inputList));
-    testConsole.printStats(task1.calculateStats(inputList));
+    task1.calculateStats(inputList);
 
     //then
     assertEquals(expectedOutput, outputStream.toString());

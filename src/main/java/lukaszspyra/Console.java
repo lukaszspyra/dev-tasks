@@ -5,7 +5,6 @@ import lukaszspyra.task3.InputGraphData;
 import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Console {
@@ -80,21 +79,6 @@ public class Console {
     output.print(message);
   }
 
-  public void printNumbers(final Map<Integer, List<Integer>> batchProcessedNumbers) {
-    output.print(batchProcessedNumbers.values()
-        .stream()
-        .flatMap(List::stream)
-        .sorted()
-        .findFirst().orElseThrow(() -> new RuntimeException("Empty stream")));
-    batchProcessedNumbers.values()
-        .stream()
-        .flatMap(List::stream)
-        .sorted()
-        .skip(1)
-        .forEach(e -> output.printf(" %d", e));
-    output.print("\n");
-  }
-
   public void task1Usage() {
     output.println("Application will print distinct numbers and statistics from entered integers.\nType list of integers separated by spaces, confirm with ENTER:");
   }
@@ -123,6 +107,16 @@ public class Console {
       output.printf("%d %d", pairingSumKey, currentNumber);
     } else {
       output.printf("\n%d %d", pairingSumKey, currentNumber);
+    }
+  }
+
+  private boolean flaga = true;
+  public void printProcessedElements(final Integer e) {
+    if (flaga){
+      output.printf("%d", e);
+      flaga = false;
+    } else {
+      output.printf(" %d", e);
     }
   }
 
