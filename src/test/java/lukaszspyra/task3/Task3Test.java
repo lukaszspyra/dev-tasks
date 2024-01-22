@@ -7,6 +7,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,36 +22,39 @@ public class Task3Test {
 
   @ParameterizedTest
   @MethodSource("providePairsConnectionsExpectedOutput")
-  public void shallCountSeparateGraphs(int[][] input, int connections, String expectedOutput) {
+  public void shallCountSeparateGraphs(InputGraphData inputGraphData, String expectedOutput) {
     //given
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     Task3 task3 = new Task3(new Console(null, new PrintStream(outputStream), null));
 
     //when
-    task3.findSeparateGraphs(connections, input);
+    task3.findSeparateGraphs(inputGraphData);
 
     //then
     assertEquals(expectedOutput, outputStream.toString());
   }
 
   private static Stream<Arguments> providePairsConnectionsExpectedOutput() {
+    Map<Integer, List<Integer>> map1 = new HashMap<Integer, List<Integer>>() {{
+      put(4, Arrays.asList(3, 1));
+      put(1, Arrays.asList(4));
+      put(5, Arrays.asList(6));
+      put(3, Arrays.asList(4));
+      put(6, Arrays.asList(5));
+    }};
+
+    Map<Integer, List<Integer>> map2 = new HashMap<Integer, List<Integer>>() {{
+      put(1, Arrays.asList(2));
+      put(2, Arrays.asList(3, 1));
+      put(4, Arrays.asList(5, 3));
+      put(3, Arrays.asList(2, 4));
+      put(5, Arrays.asList(4));
+    }};
     return Stream.of(
-        Arguments.of(new int[][]{
-            {1, 2},
-            {2, 3},
-            {4, 5}
-        }, 3, "2"),
-        Arguments.of(new int[][]{
-            {4, 3},
-            {1, 4},
-            {5, 6}
-        }, 3, "2"),
-        Arguments.of(new int[][]{
-            {1, 2},
-            {2, 3},
-            {4, 5},
-            {3, 4}
-        }, 4, "1")
+        Arguments.of(new InputGraphData(3, map1)
+            , "2"),
+        Arguments.of(new InputGraphData(4, map2)
+            , "1")
     );
   }
 

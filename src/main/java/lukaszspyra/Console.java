@@ -4,7 +4,10 @@ import lukaszspyra.task3.InputGraphData;
 
 import java.io.PrintStream;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Console {
@@ -34,7 +37,7 @@ public class Console {
 
   public InputGraphData readGraphData() {
     int numberOfConnections = readFirstPositiveNumber();
-    int[][] connectedVertices = readPairs(numberOfConnections);
+    Map<Integer, List<Integer>> connectedVertices = readPairs(numberOfConnections);
     return new InputGraphData(numberOfConnections, connectedVertices);
   }
 
@@ -54,8 +57,8 @@ public class Console {
     return numberOfConnections;
   }
 
-  private int[][] readPairs(final int numberOfConnections) {
-    int[][] pairs = new int[numberOfConnections][2];
+  private Map<Integer, List<Integer>> readPairs(final int numberOfConnections) {
+    Map<Integer, List<Integer>> verticesWithAdjacents = new HashMap<>();
     for (int i = 0; i < numberOfConnections; i++) {
       final String line = input.nextLine().trim();
       final String[] strings = line.split("\\s+");
@@ -65,14 +68,26 @@ public class Console {
       }
       try {
         final List<Integer> integers = integerParser.parse(strings);
-        pairs[i][0] = integers.get(0);
-        pairs[i][1] = integers.get(1);
+        fillUpGraphModel(verticesWithAdjacents, integers);
       } catch (ParseException e) {
         invalidInput();
         System.exit(1);
       }
     }
-    return pairs;
+    return verticesWithAdjacents;
+  }
+
+  private static void fillUpGraphModel(final Map<Integer, List<Integer>> verticesWithAdjacents, final List<Integer> integers) {
+    int vertex1 = integers.get(0);
+    int vertex2 = integers.get(1);
+
+    final List<Integer> vertex1adj = verticesWithAdjacents.getOrDefault(vertex1, new ArrayList<>());
+    vertex1adj.add(vertex2);
+    verticesWithAdjacents.put(vertex1, vertex1adj);
+
+    final List<Integer> vertex2adj = verticesWithAdjacents.getOrDefault(vertex2, new ArrayList<>());
+    vertex2adj.add(vertex1);
+    verticesWithAdjacents.put(vertex2, vertex2adj);
   }
 
   public void printStats(String message) {
@@ -111,8 +126,9 @@ public class Console {
   }
 
   private boolean flaga = true;
+
   public void printProcessedElements(final Integer e) {
-    if (flaga){
+    if (flaga) {
       output.printf("%d", e);
       flaga = false;
     } else {

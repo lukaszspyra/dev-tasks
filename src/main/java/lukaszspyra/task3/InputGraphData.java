@@ -1,23 +1,25 @@
 package lukaszspyra.task3;
 
+import java.util.List;
+import java.util.Map;
+
 public class InputGraphData {
 
   private final int connectionsNumber;
-  private final int[][] connectedVertices;
+  private final Map<Integer, List<Integer>> verticesWithChildren;
 
 
-  public InputGraphData(final int connectionsNumber, final int[][] connectedVertices) {
+  public InputGraphData(final int connectionsNumber, final Map<Integer, List<Integer>> verticesWithChildren) {
     this.connectionsNumber = connectionsNumber;
-    this.connectedVertices = connectedVertices;
+    this.verticesWithChildren = verticesWithChildren;
   }
-
 
   int getConnectionsNumber() {
     return connectionsNumber;
   }
 
-  int[][] getConnectedVertices() {
-    return connectedVertices;
+  Map<Integer, List<Integer>> getVerticesWithChildren() {
+    return verticesWithChildren;
   }
 
 }
