@@ -20,26 +20,25 @@ public class Task2 {
   }
 
   void findPairsSumming13(final List<Integer> input) {
-    Map<Integer, Integer> pairsWithOccurrence = new TreeMap<>();
+    Map<Integer, Integer> intsWithOccurrence = new TreeMap<>();
     int requiredSum = 13;
     boolean isFirstLine = true;
-    for (int i = 0; i < input.size(); i++) {
-      int currentNumber = input.get(i);
-      pairsWithOccurrence.put(currentNumber, pairsWithOccurrence.getOrDefault(currentNumber, 0) + 1);
+
+    for (int currentNumber : input) {
+      intsWithOccurrence.put(currentNumber, incrementQuantity(intsWithOccurrence, currentNumber));
     }
-
-    for (Integer key : pairsWithOccurrence.keySet()) {
+    for (Integer key : intsWithOccurrence.keySet()) {
       int pairingSumKey = requiredSum - key;
-      if (pairsWithOccurrence.containsKey(pairingSumKey) && key <= pairingSumKey) {
-
-        for (int i = 1; i <= pairsWithOccurrence.get(pairingSumKey); i++) {
-          for (int j = 1; j <= pairsWithOccurrence.get(key); j++) {
-            console.printPair(key, pairingSumKey, isFirstLine);
-            isFirstLine = false;
-          }
+      if (key <= pairingSumKey && intsWithOccurrence.containsKey(pairingSumKey)) {
+        for (int i = 0; i < intsWithOccurrence.get(pairingSumKey) * intsWithOccurrence.get(key); i++) {
+          console.printPair(key, pairingSumKey, isFirstLine);
+          if (isFirstLine) isFirstLine = false;
         }
       }
     }
   }
 
+  private static int incrementQuantity(final Map<Integer, Integer> intsWithOccurrence, final int currentNumber) {
+    return intsWithOccurrence.getOrDefault(currentNumber, 0) + 1;
+  }
 }

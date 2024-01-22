@@ -57,6 +57,25 @@ public class Task2Test {
         Arguments.of(Arrays.asList(7, 6, 7),
             "6 7\n" +
                 "6 7"
+        ),
+        Arguments.of(Arrays.asList(7, 6, 6, 7),
+            "6 7\n" +
+                "6 7\n" +
+                "6 7\n" +
+                "6 7"
+        ),
+        Arguments.of(Arrays.asList(1, 1, 1, 12, 12),
+            "1 12\n" +
+                "1 12\n" +
+                "1 12\n" +
+                "1 12\n" +
+                "1 12\n" +
+                "1 12"
+        ),
+        Arguments.of(Arrays.asList(1, 1, -1, 12, 14),
+            "-1 14\n" +
+                "1 12\n" +
+                "1 12"
         )
     );
   }
